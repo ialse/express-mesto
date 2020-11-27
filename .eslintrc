@@ -1,0 +1,6 @@
+{
+  "extends": "airbnb-base", // придерживаемся стиля airbnb
+  "rules": {
+    "allow": "true" //разрешаем подчеркивание
+  }
+}
