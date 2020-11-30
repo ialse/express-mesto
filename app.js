@@ -3,9 +3,7 @@ const express = require('express');
 const path = require('path');
 
 // Импортирую роутеры
-const users = require('./routes/users.js');
-const user = require('./routes/user.js');
-const cards = require('./routes/cards.js');
+const router = require('./routes/routes');
 
 const { PORT = 3000 } = process.env;
 
@@ -16,9 +14,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Использую роутеры
-app.use('/', users);
-app.use('/', user);
-app.use('/', cards);
+app.use('/', router);
 
 // Устанавливаю обработчик на порт
 app.listen(PORT, () => {
