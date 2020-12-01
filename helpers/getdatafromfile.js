@@ -1,13 +1,8 @@
 const fsPromises = require('fs').promises; // импортирую модуль для работы с файловой системой
 
-function getDataFromFiles(pathToFile) {
+function getDataFromFile(pathToFile) {
   return fsPromises.readFile(pathToFile, { encoding: 'utf8' })
-    .then((data) => {
-      JSON.parse(data); // Если все ок, возвращаем JSON карточек
-    })
-    .catch((err) => {
-      console.log(err); // Если ошибка, то возращаем текст ошибки
-    });
+    .then(data => JSON.parse(data)); // Если все ок, возвращаем JSON карточек
 }
 
-module.exports = getDataFromFiles;
+module.exports = getDataFromFile;

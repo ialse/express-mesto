@@ -21,11 +21,9 @@
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "nodemon": "^2.0.6",
-    "rimraf": "^3.0.2"
+    "nodemon": "^2.0.6"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
     "express": "^4.17.1"
   }
 }

@@ -1,20 +1,13 @@
-// Импортирую встроенные модули
-const express = require('express');
-const path = require('path');
+const path = require('path'); // Импортирую модуль для работы с путями
+const express = require('express'); // Импортирую express
+const router = require('./routes/routes'); // Импортирую роутеры
 
-// Импортирую роутеры
-const router = require('./routes/routes');
+const { PORT = 3000 } = process.env; // Устанавливаю порт
+const app = express(); // Запускаю сервер
 
-const { PORT = 3000 } = process.env;
-
-// Запускаю сервер
-const app = express();
-
-// Раздача статичных файлов
+// Включаю раздачу статичных файлов
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Использую роутеры
-app.use('/', router);
+app.use('/', router); // Включаю роутер
 
 // Устанавливаю обработчик на порт
 app.listen(PORT, () => {
