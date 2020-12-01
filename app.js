@@ -13,4 +13,3 @@ app.use('/', router); // Включаю роутер
 app.listen(PORT, () => {
   console.log(`Сервер работает. Порт: ${PORT}`);
 });
-
