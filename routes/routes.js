@@ -10,6 +10,6 @@ const notFound = require('../controllers/notfound');
 router.get('/users', getUsers);
 router.get('/users/:id', getUser);
 router.get('/cards', getCards);
-router.get('/*', notFound);
+router.all('*', notFound);
 
 module.exports = router;
