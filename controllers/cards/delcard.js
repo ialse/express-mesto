@@ -1,6 +1,6 @@
 const Card = require('../../models/card'); // импортирую модель карточки
 
-// Добавляю карточку в базу
+// Удаляю карточку из базы
 function delCard(req, res) {
   return Card.findByIdAndRemove(req.params.cardId)
     .then((card) => {

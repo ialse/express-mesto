@@ -1,8 +1,9 @@
 const Card = require('../../models/card');
 
-// Получаю данные карточек из файла
+// Получаю карточки из базы
 function getCards(req, res) {
   return Card.find({})
+    .populate('owner')
     .then((cards) => {
       if (cards.length) { // проверяю, есть ли хоть одна карточка
         return res.status(200).send(cards);

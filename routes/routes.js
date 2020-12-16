@@ -15,7 +15,7 @@ const delLike = require('../controllers/cards/dellike');
 
 const notFound = require('../controllers/notfound');
 
-// Устанавливаю обработчики
+// Устанавливаю обработчики роутеров
 router.get('/users', getUsers);
 router.get('/users/:userId', getUser);
 router.post('/users', addUser);

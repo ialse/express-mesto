@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const httpValid = require('../helpers/regexp');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -18,10 +19,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(link) {
-        return true;
-        return !(/(^https?:\/\/)?[a-z0-9~_\-\.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/i).test(link);
+        return httpValid(link);
       },
-      message: 'Адрес некорректный',
+      message: 'Ссылка на аватар некорректная',
     },
   },
 });

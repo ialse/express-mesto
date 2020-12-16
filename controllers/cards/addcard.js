@@ -2,17 +2,15 @@ const Card = require('../../models/card'); // импортирую модель 
 
 // Добавляю карточку в базу
 function addCard(req, res) {
-  const { name, link, owner } = req.body; // беру данные из запроса
+  const { name, link } = req.body; // беру данные из запроса
 
   // Проверка на корректный запрос, если что то пустое, то:
-  if (!name || !link || !owner) {
+  if (!name || !link) {
     return res.status(400).send({ message: 'Некорректный запрос' });
   }
 
-  owner._id = req.user._id; // подставляю в ИД владельца захардкоденный ИД
-
-  return Card.create({ name, link, owner })
-    .then((card) => res.status(200).send(card))
+  return Card.create({ name, link, owner: req.user._id })
+    .then((card) => res.status(200).send({ message: `Карточка создана: ${card.name}, ${card.link}` }))
     // данные не записались, вернём ошибку
     .catch((err) => {
       if (err.name === 'CastError') {
