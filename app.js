@@ -1,11 +1,11 @@
-const path = require('path'); // Импортирую модуль для работы с путями
-const express = require('express'); // Импортирую express
-const mongoose = require('mongoose'); // Импортирую mongoose
+const path = require('path');
+const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const router = require('./routes/routes'); // Импортирую роутеры
+const router = require('./routes/routes');
 
-const { PORT = 3000 } = process.env; // Устанавливаю порт
-const app = express(); // Запускаю сервер
+const { PORT = 3000 } = process.env;
+const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
@@ -29,7 +29,6 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', router); // Включаю роутер
 
-// Устанавливаю обработчик на порт
 app.listen(PORT, () => {
   console.log(`Сервер работает. Порт: ${PORT}`);
 });

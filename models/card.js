@@ -4,9 +4,9 @@ const httpValid = require('../helpers/regexp');
 const cardSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 30,
+    required: [true, 'Поле обязательно'],
+    minlength: [2, 'Минимальная длина 2 символа'],
+    maxlength: [30, 'Максимальная длина 30 символов'],
   },
 
   link: {
@@ -26,10 +26,10 @@ const cardSchema = new mongoose.Schema({
     required: true,
   },
 
-  likes: {
-    type: Array,
-    default: [],
-  },
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+  }],
 
   createdAt: {
     type: Date,

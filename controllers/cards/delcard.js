@@ -10,12 +10,7 @@ function delCard(req, res) {
       return res.status(404).send({ message: 'Карточка не найдена в базе' });
     })
     // данные не записались, вернём ошибку
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        return res.status(404).send({ message: 'Карточка не найдена в базе' });
-      }
-      return res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` });
-    });
+    .catch((err) => res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` }));
 }
 
 module.exports = delCard;
