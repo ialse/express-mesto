@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 // временное решение авторизации
 app.use((req, res, next) => {
   req.user = {
-    _id: '5fd51fcd9a45e823a0036f67' // ИД пользователя
+    _id: '5fd51fcd9a45e823a0036f67', // ИД пользователя
   };
 
   next();
