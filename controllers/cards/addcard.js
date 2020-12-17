@@ -12,12 +12,7 @@ function addCard(req, res) {
   return Card.create({ name, link, owner: req.user._id })
     .then((card) => res.status(200).send({ message: `Карточка создана: ${card.name}, ${card.link}` }))
     // данные не записались, вернём ошибку
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        return res.status(404).send({ message: 'Пользователь не найден' });
-      }
-      return res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` });
-    });
+    .catch((err) => res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` }));
 }
 
 module.exports = addCard;
