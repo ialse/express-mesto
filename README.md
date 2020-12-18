@@ -12,6 +12,12 @@
 ### eslint
 Используется модуль eslint для сохранения хорошего стиля кода.
 
+### MongoDB + Mongoose
+Для взаимодействия с базой MongoDB используется модуль Mongoose
+
+### REST API
+В данном проекте соблюдатся принципы REST. Обмен данными происходит в формате JSON
+
 ### Стэк:
 1. Visual studio code:
    Плагины:
@@ -23,7 +29,9 @@
 3. GitHub
 4. Postman
 5. Node.js + express.js
-6. NiM
+6. Node.js V8 --inspector Manager
+7. MongoDB
+8. Mongoose
 
 
 #### Ссылка на проект:
