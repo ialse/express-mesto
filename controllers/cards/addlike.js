@@ -9,7 +9,7 @@ function addLike(req, res) {
   )
     .then((card) => {
       if (card) {
-        return res.status(200).send({ message: 'Лайк поставлен!' });
+        return res.status(200).send(card);
       }
       return res.status(404).send({ message: 'Карточка не найдена' });
     })
