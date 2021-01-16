@@ -1,4 +1,4 @@
-const router = require('express').Router(); // Импортирую модуль роутера
+const router = require('express').Router();
 
 // Импортирую контроллеры
 const getUsers = require('../controllers/users/getusers');
