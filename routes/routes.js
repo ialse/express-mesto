@@ -3,6 +3,7 @@ const router = require('express').Router();
 // Импортирую контроллеры
 const getUsers = require('../controllers/users/getusers');
 const getUser = require('../controllers/users/getuser');
+const getCurUser = require('../controllers/users/getcuruser');
 const addUser = require('../controllers/users/adduser');
 const updUser = require('../controllers/users/upduser');
 const updAvatar = require('../controllers/users/updavatar');
@@ -17,6 +18,7 @@ const notFound = require('../controllers/notfound');
 
 // Устанавливаю обработчики роутеров
 router.get('/users', getUsers);
+router.get('/users/me', getCurUser);
 router.get('/users/:userId', getUser);
 router.post('/users', addUser);
 router.patch('/users/me', updUser);
