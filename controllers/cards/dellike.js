@@ -1,4 +1,5 @@
 const Card = require('../../models/card'); // импортирую модель карточки
+const NotFoundError = require('../../errors/not-found-err');
 
 // Удаляю лайк из массива карточки
 function delLike(req, res, next) {
@@ -11,7 +12,7 @@ function delLike(req, res, next) {
       if (card) {
         return res.status(200).send(card);
       }
-      return res.status(404).send({ message: 'Карточка не найдена' });
+      throw new NotFoundError('Карточка не найдена');
     })
     // данные не записались, вернём ошибку
     .catch(next);

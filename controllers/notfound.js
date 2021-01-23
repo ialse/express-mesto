@@ -1,6 +1,8 @@
+const NotFoundError = require('../errors/not-found-err');
+
 // Если ввели любую другую страницу
-function notFound(req, res) {
-  return res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+function notFound() {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
 }
 
 module.exports = notFound;

@@ -16,44 +16,20 @@ const addLike = require('../controllers/cards/addlike');
 const delLike = require('../controllers/cards/dellike');
 
 const notFound = require('../controllers/notfound');
-// const { updUserValid } = require('../helpers/validation');
+const { updUserValid, addUserValid, updAvatarValid, addCardValid } = require('../helpers/validation');
 
 // Устанавливаю обработчики роутеров
 // Для пользователя
 router.get('/users', getUsers);
 router.get('/users/me', getCurUser);
 router.get('/users/:userId', getUser);
-
-router.post('/users', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
-  }),
-}), addUser);
-
-router.patch('/users/me', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
-  }),
-}), updUser);
-
-router.patch('/users/me/avatar', celebrate({
-  body: Joi.object().keys({
-    avatar: Joi.string().required(),
-  }),
-}), updAvatar);
+router.post('/users', addUserValid, addUser);
+router.patch('/users/me', updUserValid, updUser);
+router.patch('/users/me/avatar', updAvatarValid, updAvatar);
 
 // Для карточек
 router.get('/cards', getCards);
-
-router.post('/cards', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required(),
-  }),
-}), addCard);
-
+router.post('/cards', addCardValid, addCard);
 router.delete('/cards/:cardId', delCard);
 router.put('/cards/:cardId/likes', addLike);
 router.delete('/cards/:cardId/likes', delLike);

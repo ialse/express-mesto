@@ -6,12 +6,7 @@ function addCard(req, res, next) {
 
   return Card.create({ name, link, owner: req.user._id })
     .then((card) => res.status(200).send(card))
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return res.status(400).send({ message: err.message });
-      }
-      next(err);
-    });
+    .catch(next);
 }
 
 module.exports = addCard;
