@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: [true, 'Поле Email обязательно!'],
     unique: true,
     validate: {
       validator(email) {
@@ -38,8 +38,8 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
-    minlength: 8,
+    required: [true, 'Поле Пароль обязательно!'],
+    minlength: [8, 'Минимальная длина 8 символов'],
     select: false,
   },
 });

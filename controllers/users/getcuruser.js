@@ -1,15 +1,16 @@
 const User = require('../../models/user');
+const NotFoundError = require('../../errors/not-found-err');
 
 // Получаю данные пользователя
-function getCurUser(req, res) {
+function getCurUser(req, res, next) {
   return User.findById(req.user._id)
     .then((user) => {
       if (!user) {
-        return res.status(404).send({ message: 'Пользователь не найден' });
+        throw new NotFoundError('Пользователь не найден');
       }
       return res.status(200).send(user);
     })
-    .catch((err) => res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` }));
+    .catch(next);
 }
 
 module.exports = getCurUser;

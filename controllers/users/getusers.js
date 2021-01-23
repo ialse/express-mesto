@@ -1,10 +1,10 @@
 const User = require('../../models/user');
 
 // Получаю данные пользователей из файла
-function getUsers(req, res) {
+function getUsers(req, res, next) {
   return User.find({})
     .then((users) => res.status(200).send(users))
-    .catch((err) => res.status(500).send(`Ошибка чтения данных. Подробнее: ${err}`));
+    .catch(next);
 }
 
 module.exports = getUsers;

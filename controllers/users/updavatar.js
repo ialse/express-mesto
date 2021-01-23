@@ -1,7 +1,7 @@
 const User = require('../../models/user');
 
 // Получаю данные пользователя из файла
-function updAvatar(req, res) {
+function updAvatar(req, res, next) {
   const { avatar } = req.body;
 
   return User.findByIdAndUpdate(
@@ -15,12 +15,7 @@ function updAvatar(req, res) {
   )
     .then((user) => res.status(200).send(user))
     // данные не записались, вернём ошибку
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return res.status(400).send({ message: err.message });
-      }
-      return res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` });
-    });
+    .catch(next);
 }
 
 module.exports = updAvatar;

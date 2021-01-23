@@ -1,21 +1,25 @@
 const bcrypt = require('bcryptjs');
 const User = require('../../models/user'); // импортирую модель пользователя
+const RegistrationError = require('../../errors/registration-err');
 
 // Добавляю пользователя в базу
-function addUser(req, res) {
-  return bcrypt.hash(req.body.password, 10)
+function addUser(req, res, next) {
+  const { email } = req.body;
+
+  // Проверяем, есть ли пользователь с такой почтой в базе
+  User.findOne({ email })
+    .then((user) => {
+      if (user) {
+        throw new RegistrationError('Такой Email уже используется');
+      }
+      return bcrypt.hash(req.body.password, 10);
+    })
     .then((hash) => User.create({
-      email: req.body.email,
+      email,
       password: hash,
     }))
     .then((user) => res.status(200).send(user))
-    // данные не записались, вернём ошибку
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return res.status(400).send({ message: err.message });
-      }
-      return res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` });
-    });
+    .catch(next);
 }
 
 module.exports = addUser;

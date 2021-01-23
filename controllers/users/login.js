@@ -1,15 +1,16 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
+const AuthorisationError = require('../../errors/authorisation-err');
 
-function login(req, res) {
+function login(req, res, next) {
   const { email, password } = req.body;
   let userID;
 
   return User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new Error('Неправильные почта или пароль'));
+        throw new AuthorisationError('Неправильные почта или пароль');
       }
       userID = user.id;
 
@@ -17,7 +18,7 @@ function login(req, res) {
     })
     .then((matched) => {
       if (!matched) {
-        return Promise.reject(new Error('Неправильные почта или пароль'));
+        throw new AuthorisationError('Неправильные почта или пароль');
       }
 
       // генерируем уникальный ключ и шифруем его
@@ -39,9 +40,7 @@ function login(req, res) {
       )
         .send({ message: 'Авторизация успешна!' });
     })
-    .catch((err) => {
-      res.status(401).send({ message: err.message });
-    });
+    .catch(next);
 }
 
 module.exports = login;

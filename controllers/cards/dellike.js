@@ -1,7 +1,7 @@
 const Card = require('../../models/card'); // импортирую модель карточки
 
 // Удаляю лайк из массива карточки
-function delLike(req, res) {
+function delLike(req, res, next) {
   return Card.findByIdAndUpdate(
     req.params.cardId,
     { $pull: { likes: req.user._id } }, // добавить _id в массив, если его там нет
@@ -14,7 +14,7 @@ function delLike(req, res) {
       return res.status(404).send({ message: 'Карточка не найдена' });
     })
     // данные не записались, вернём ошибку
-    .catch((err) => res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` }));
+    .catch(next);
 }
 
 module.exports = delLike;

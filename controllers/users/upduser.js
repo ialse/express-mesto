@@ -1,7 +1,7 @@
 const User = require('../../models/user');
 
 // Получаю данные пользователя из файла
-function updUser(req, res) {
+function updUser(req, res, next) {
   const { name, about } = req.body;
 
   return User.findByIdAndUpdate(
@@ -19,7 +19,7 @@ function updUser(req, res) {
       if (err.name === 'ValidationError') {
         return res.status(400).send({ message: err.message });
       }
-      return res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` });
+      next(err);
     });
 }
 

@@ -1,7 +1,7 @@
 const Card = require('../../models/card'); // импортирую модель карточки
 
 // Добавляю лайк в массив карточки
-function addLike(req, res) {
+function addLike(req, res, next) {
   return Card.findByIdAndUpdate(
     req.params.cardId,
     { $addToSet: { likes: req.user._id } }, // добавить _id в массив, если его там нет
@@ -14,7 +14,7 @@ function addLike(req, res) {
       return res.status(404).send({ message: 'Карточка не найдена' });
     })
     // данные не записались, вернём ошибку
-    .catch((err) => res.status(500).send({ message: `Произошла ошибка на сервере: ${err}` }));
+    .catch(next);
 }
 
 module.exports = addLike;
