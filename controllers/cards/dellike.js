@@ -8,6 +8,7 @@ function delLike(req, res, next) {
     { $pull: { likes: req.user._id } }, // добавить _id в массив, если его там нет
     { new: true },
   )
+    .populate(['likes', 'owner'])
     .then((card) => {
       if (card) {
         return res.status(200).send(card);

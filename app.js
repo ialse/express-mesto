@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -18,6 +19,26 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useCreateIndex: true,
   useFindAndModify: false,
 });
+
+const corsOptions = {
+  origin: [
+    'http://localhost:3001',
+    'http://localhost:3000',
+    'http://127.0.0.1:3001',
+    'http://127.0.0.1:3000',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: [
+    'Content-Type',
+    'origin',
+    'x-access-token',
+  ],
+  credentials: true,
+};
+
+app.use('*', cors(corsOptions));
 
 // Включаю бодипарсер
 app.use(bodyParser.json());

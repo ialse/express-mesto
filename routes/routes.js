@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { celebrate, Joi } = require('celebrate');
 
 // Импорт контроллеров
 const getUsers = require('../controllers/users/getusers');
 const getUser = require('../controllers/users/getuser');
 const getCurUser = require('../controllers/users/getcuruser');
+const logout = require('../controllers/users/logout');
 const addUser = require('../controllers/users/adduser');
 const updUser = require('../controllers/users/upduser');
 const updAvatar = require('../controllers/users/updavatar');
@@ -23,9 +23,11 @@ const { updUserValid, addUserValid, updAvatarValid, addCardValid } = require('..
 router.get('/users', getUsers);
 router.get('/users/me', getCurUser);
 router.get('/users/:userId', getUser);
+router.get('/logout', logout);
 router.post('/users', addUserValid, addUser);
 router.patch('/users/me', updUserValid, updUser);
 router.patch('/users/me/avatar', updAvatarValid, updAvatar);
+
 
 // Для карточек
 router.get('/cards', getCards);
